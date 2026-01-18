@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="page_title_contact">Contact | Hiba Raiss</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+  <div class="container header__inner">
+
+    <a class="brand" href="index.html">
+      <span class="brand__text" data-i18n="brand_name">Hiba Raiss</span>
+    </a>
+
+    <nav class="nav">
+      <button class="nav__toggle" id="navToggle" aria-expanded="false">
+        <span class="nav__toggle-lines"></span>
+        <span class="sr-only" data-i18n="menu_toggle">Menu</span>
+      </button>
+
+      <div class="nav__menu" id="navMenu">
+        <a class="nav__link" href="index.html" data-i18n="nav_profile">Profile</a> <!-- AJOUTER LE TEXTE ICI -->
+        <a class="nav__link" href="skills.html" data-i18n="nav_skills">Skills</a> <!-- AJOUTER LE TEXTE ICI -->
+        <a class="nav__link" href="projects.html" data-i18n="nav_projects">Projects</a> <!-- AJOUTER LE TEXTE ICI -->
+        <a class="nav__link" href="contact.html" data-i18n="nav_contact">Contact</a> <!-- AJOUTER LE TEXTE ICI -->
+
+        <!-- Theme -->
+        <button class="btn btn--ghost" id="themeToggle" type="button">
+          <span id="themeIcon">🌙</span>
+        </button>
+
+        <!-- Language buttons -->
+        <button class="btn btn--ghost" onclick="setLanguage('fr')">FR</button>
+        <button class="btn btn--ghost" onclick="setLanguage('en')">EN</button> <!-- CORRIGER ICI -->
+        
+      </div>
+    </nav>
+
+  </div>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main>
+  <section class="section">
+    <div class="container">
+
+      <!-- Page header -->
+      <div class="pagehead">
+        <h1 data-i18n="contact_title">Contact</h1>
+      </div>
+
+      <!-- Contact layout -->
+      <div class="contact-layout">
+
+        <!-- Contact card -->
+        <div class="card contact-card">
+          <h2 data-i18n="contact_get_in_touch">Get in Touch</h2>
+          <p class="muted" data-i18n="contact_intro_1">I'm always open to discussing new opportunities, projects, or collaborations.</p>
+          <p class="muted" data-i18n="contact_intro_2">Feel free to reach out using any of the channels below :</p>
+        
+
+          <div class="contact-list">
+            <a class="contact-item" href="mailto:raisshiba.dev@gmail.com">
+              <span aria-hidden="true">✉️</span>
+              <span data-i18n="contact_email_label">Email</span>: raisshiba.dev@gmail.com
+            </a>
+
+            <a class="contact-item"
+               href="https://www.linkedin.com/in/hibaraiss"
+               target="_blank" rel="noreferrer">
+              <span aria-hidden="true">💼</span>
+              LinkedIn
+            </a>
+
+            <a class="contact-item"
+               href="https://github.com/heebar-rs"
+               target="_blank" rel="noreferrer">
+              <span aria-hidden="true">🧑‍💻</span>
+              GitHub
+            </a>
+          </div>
+
+          <div class="section__spacer"></div>
+
+          <h3 data-i18n="contact_availability">Availability</h3>
+          <p class="muted" data-i18n="contact_availability_text">Freelance · Internship · Open to opportunities</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="muted">© <span id="year"></span> <span data-i18n="brand_name">Hiba Raiss</span></p>
+    <a class="to-top" href="index.html" data-i18n="back_to_profile">← Back to profile</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

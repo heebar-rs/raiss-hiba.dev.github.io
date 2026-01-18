@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="page_title_projects">Projects | Hiba Raiss</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="header">
+  <div class="container header__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__text" data-i18n="brand_name">Hiba Raiss</span>
+    </a>
+
+    <nav class="nav">
+      <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+        <span class="nav__toggle-lines" aria-hidden="true"></span>
+        <span class="sr-only" data-i18n="menu_toggle">Menu</span>
+      </button>
+
+      <div class="nav__menu" id="navMenu">
+        <a class="nav__link" href="index.html" data-i18n="nav_profile">profile</a>
+        <a class="nav__link" href="skills.html" data-i18n="nav_skills">Skills</a>
+        <a class="nav__link" href="projects.html" data-i18n="nav_projects">Projects</a>
+        <a class="nav__link" href="contact.html" data-i18n="nav_contact">Contact</a>
+
+        <!-- Theme -->
+        <button class="btn btn--ghost" id="themeToggle" type="button" aria-label="Change theme">
+          <span id="themeIcon" aria-hidden="true">🌙</span>
+        </button>
+
+        <!-- Language -->
+        <button class="btn btn--ghost" onclick="setLanguage('en')" type="button">EN</button>
+        <button class="btn btn--ghost" onclick="setLanguage('fr')" type="button">FR</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= MAIN ================= -->
+<main>
+<section class="section">
+<div class="container">
+
+  <!-- ===== PAGE HEADER ===== -->
+  <div class="pagehead pagehead--row">
+    <div>
+      <h1 data-i18n="projects_title">My Projects</h1>
+    </div>
+
+    <!-- ===== FILTERS ===== -->
+    <div class="projects__controls">
+      <input
+        class="input"
+        id="searchInput"
+        type="search"
+        data-i18n="search_placeholder"
+        placeholder="Search project..."
+      />
+
+<div class="segmented" role="tablist">
+  <button class="segmented__btn is-active" data-filter="all" data-i18n="filter_all">All</button>
+  <button class="segmented__btn" data-filter="frontend" data-i18n="filter_frontend">Front-end</button>
+  <button class="segmented__btn" data-filter="fullstack" data-i18n="filter_fullstack">Full-stack</button>
+  <button class="segmented__btn" data-filter="symfony" data-i18n="filter_symfony">symfony</button>
+
+  <button class="segmented__btn" data-filter="php" data-i18n="filter_php">PHP</button>
+  
+</div>
+    </div>
+  </div>
+
+  <!-- ================= PROJECTS GRID ================= -->
+  <div class="projects" id="projectsGrid">
+
+    <!-- ===== PROJECT 1 ===== -->
+    <article class="project card"
+      data-category="fullstack php "
+      data-title="School Management System">
+
+
+
+      <h3 class="project__title" data-i18n="project1_title">School Management System</h3>
+      <p class="muted" data-i18n="project1_desc"></p>
+
+      <div class="project__tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">php</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">JSON</span>
+      </div>
+
+      <div class="project__actions">
+        <a class="btn btn--small btn--primary" href="https://github.com/heebar-rs/school-management" target="_blank" data-i18n="btn_github">GitHub</a>
+        <a class="btn btn--small btn--ghost" href="videos/school.mp4" target="_blank" data-i18n="btn_video">Video Demo</a>
+      </div>
+    </article>
+
+    <!-- ===== PROJECT 2 ===== -->
+    <article class="project card"
+      data-category="frontend "
+      data-title="Restaurant Menu Website">
+
+
+
+      <h3 class="project__title" data-i18n="project2_title">Restaurant Menu Website</h3>
+      <p class="muted" data-i18n="project2_desc"></p>
+
+            <div class="project__tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+    
+        <span class="tag">JavaScript</span>
+    
+      </div>
+
+      <div class="project__actions">
+        <a class="btn btn--small btn--primary" href="https://github.com/heebar-rs/Restaurant-menu" target="_blank" data-i18n="btn_github">GitHub</a>
+        <a class="btn btn--small btn--ghost" href="videos/restaurant.mp4" target="_blank" data-i18n="btn_video">Video Demo</a>
+      </div>
+    </article>
+
+        <!-- ===== PROJECT 3 ===== -->
+    <article class="project card"
+      data-category="symfony fullstack php"
+      data-title="user management system">
+
+
+
+      <h3 class="project__title" data-i18n="project3_title">user management system</h3>
+      <p class="muted" data-i18n="project3_desc"></p>
+
+            <div class="project__tags">
+        <span class="tag">HTML/CSS</span>
+        <span class="tag">Symfony</span>
+        <span class="tag">php</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">xampp</span>
+      </div>
+
+      <div class="project__actions">
+        <a class="btn btn--small btn--primary" href="https://github.com/heebar-rs/Users-Management" target="_blank" data-i18n="btn_github">GitHub</a>
+        <a class="btn btn--small btn--ghost" href="videos/USER.mp4" target="_blank" data-i18n="btn_video">Video Demo</a>
+      </div>
+    </article>
+
+  </div>
+</div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="muted">© <span id="year"></span> Hiba Raiss</p>
+    <a class="to-top" href="index.html" data-i18n="back_to_home">← Back to Home</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

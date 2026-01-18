@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="page_title_skills">Skills — Hiba Raiss</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+<header class="header">
+  <div class="container header__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__text" data-i18n="brand_name">Hiba Raiss</span>
+    </a>
+
+    <nav class="nav">
+      <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+        <span class="nav__toggle-lines" aria-hidden="true"></span>
+        <span class="sr-only" data-i18n="menu_toggle">Menu</span>
+      </button>
+
+      <div class="nav__menu" id="navMenu">
+        <a class="nav__link" href="index.html" data-i18n="nav_profile">Profile</a>
+        <a class="nav__link" href="skills.html" data-i18n="nav_skills">Skills</a>
+        <a class="nav__link" href="projects.html" data-i18n="nav_projects">Projects</a>
+        <a class="nav__link" href="contact.html" data-i18n="nav_contact">Contact</a>
+
+        <!-- Theme -->
+        <button class="btn btn--ghost" id="themeToggle" type="button" aria-label="Toggle theme">
+          <span id="themeIcon" aria-hidden="true">🌙</span>
+        </button>
+
+        <!-- Language -->
+        <button class="btn btn--ghost lang-btn" data-lang="en" type="button">EN</button>
+        <button class="btn btn--ghost lang-btn" data-lang="fr" type="button">FR</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="section">
+<div class="container">
+
+  <div class="pagehead">
+    <h1 data-i18n="skills_title">Skills</h1>
+    <p class="muted" data-i18n="skills_intro">
+      Here are my technical skills and competencies:
+    </p>
+  </div>
+
+  <div class="grid-2">
+
+    <!-- CERTIFICATIONS -->
+    <div class="card">
+      <h2 data-i18n="certifications_title">Certifications / Training</h2>
+      <ul class="bullets">
+        <li><span data-i18n="cert_1">Certificate 1 — coursera : c++/cpp</span></li>
+        <li><span data-i18n="cert_2">Certificate 2 — Coursera : javascript</span></li>
+
+      </ul>
+    </div>
+
+    <!-- LANGUAGES & WEB -->
+    <div class="card">
+      <h2 data-i18n="skills_web">Languages & Web</h2>
+
+      <div class="skillline">
+        <div class="skillline__top">
+          <strong data-i18n="skill_html">HTML / CSS</strong>
+          <span class="muted" data-i18n="skill_level_advanced">Advanced</span>
+        </div>
+        <div class="bar"><span style="width:90%"></span></div>
+      </div>
+
+      <div class="skillline">
+        <div class="skillline__top">
+          <strong data-i18n="skill_php">PHP</strong>
+          <span class="muted" data-i18n="skill_level_advanced">Advanced</span>
+        </div>
+        <div class="bar"><span style="width:85%"></span></div>
+      </div>
+
+      <div class="skillline">
+        <div class="skillline__top">
+          <strong data-i18n="skill_javascript">JavaScript</strong>
+          <span class="muted" data-i18n="skill_level_intermediate">Intermediate</span>
+        </div>
+        <div class="bar"><span style="width:80%"></span></div>
+      </div>
+    </div>
+
+    <!-- FRAMEWORKS -->
+    <div class="card">
+      <h2 data-i18n="frameworks_title">Frameworks</h2>
+
+      <div class="skillline">
+        <div class="skillline__top">
+          <strong data-i18n="framework_laravel">Laravel</strong>
+          <span class="muted" data-i18n="skill_level_intermediate">Intermediate</span>
+        </div>
+        <div class="bar"><span style="width:50%"></span></div>
+      </div>
+
+      <div class="skillline">
+        <div class="skillline__top">
+          <strong data-i18n="framework_symfony">Symfony</strong>
+          <span class="muted" data-i18n="skill_level_advanced">Advanced</span>
+        </div>
+        <div class="bar"><span style="width:75%"></span></div>
+      </div>
+    </div>
+
+    <!-- TOOLS + STRENGTHS -->
+    <div class="card">
+      <h2 data-i18n="tools_title">Tools</h2>
+      <div class="tags">
+        <span class="tag" data-i18n="tool_git">Git / GitHub</span>
+        <span class="tag" data-i18n="tool_figma">Figma</span>
+        <span class="tag" data-i18n="tool_vscode">VS Code</span>
+        <span class="tag" data-i18n="tool_xampp">XAMPP</span>
+        <span class="tag" data-i18n="tool_symfony_laravel">Symfony / Laravel</span>
+      </div>
+
+      <h2 data-i18n="strengths_title">Professional Strengths</h2>
+      <ul class="bullets">
+        <li><span data-i18n="strength_1">Strong collaboration and teamwork skills</span></li>
+        <li><span data-i18n="strength_2">Ability to work independently and stay organized</span></li>
+        <li><span data-i18n="strength_3">Clear communication and presentation skills</span></li>
+        <li><span data-i18n="strength_4">Effective time management</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section__spacer"></div>
+
+  <!-- LANGUAGES -->
+  <div class="grid-2">
+    <div class="card">
+      <h2 data-i18n="languages_title">Languages</h2>
+
+      <div class="lang">
+        <div class="lang__row">
+          <strong data-i18n="lang_french">French</strong>
+          <span class="muted" data-i18n="lang_intermediate">Intermediate</span>
+        </div>
+
+        <div class="lang__row">
+          <strong data-i18n="lang_english">English</strong>
+          <span class="muted" data-i18n="lang_fluent">Fluent</span>
+        </div>
+
+        <div class="lang__row">
+          <strong data-i18n="lang_arabic">Arabic</strong>
+          <span class="muted" data-i18n="lang_native">Native</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="muted">© <span id="year"></span> <span data-i18n="brand_name">Hiba Raiss</span></p>
+    <a class="to-top" href="index.html" data-i18n="back_to_profile">← Back to profile</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

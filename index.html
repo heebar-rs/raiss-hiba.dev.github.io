@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title data-i18n="page_title_home">Profile — Hiba Raiss</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="index.html">
+        <span class="brand__text" data-i18n="brand_name">Hiba Raiss</span>
+      </a>
+
+      <nav class="nav">
+        <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+          <span class="nav__toggle-lines" aria-hidden="true"></span>
+          <span class="sr-only" data-i18n="menu_toggle">Menu</span>
+        </button>
+        <div class="nav__menu" id="navMenu">
+          <a class="nav__link" data-page="profile" href="index.html" data-i18n="nav_profile">profile</a>
+          <a class="nav__link" data-page="skills" href="skills.html" data-i18n="nav_skills">Skills</a>
+          <a class="nav__link" data-page="projects" href="projects.html" data-i18n="nav_projects">Projects</a>
+          <a class="nav__link" data-page="contact" href="contact.html" data-i18n="nav_contact">Contact</a>
+          
+          <button class="btn btn--ghost" id="themeToggle" type="button" aria-label="Change theme">
+            <span id="themeIcon" aria-hidden="true">🌙</span>
+          </button>
+
+          <button class="btn btn--ghost" onclick="setLanguage('en')">EN</button>
+          <button class="btn btn--ghost" onclick="setLanguage('fr')">FR</button>         
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="pagehead">
+          <h1 data-i18n="profile_heading">My profile</h1>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h2 data-i18n="about_title">About Me</h2>
+<img src="/me.jpeg"
+     alt="Hiba Raiss"
+     style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%;"
+     class="profile-image">
+
+            <p class="muted" data-i18n="about_text">
+              I am <strong>Hiba Raiss</strong>, a passionate full-stack web developer.
+              I specialize in building clean, efficient, and user-friendly web applications.
+              I have experience working on academic and personal projects including
+              showcase websites, dashboards, and dynamic web platforms.
+            </p>
+
+            <div class="tags">
+              <span class="tag" data-i18n="tag_fullstack">full-stack Development</span>
+              <span class="tag" data-i18n="tag_symfony">symfony</span>
+              <span class="tag" data-i18n="tag_laravel">laravel</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 data-i18n="info_title">Information</h2>
+            <div class="info">
+              <div class="info__row">
+                <span data-i18n="info_name">Name:</span>
+                <strong data-i18n="info_name_value">Hiba Raiss</strong>
+              </div>
+              <div class="info__row">
+                <span data-i18n="info_age">Age:</span>
+                <strong data-i18n="info_age_value">20</strong>
+              </div>
+              <div class="info__row">
+                <span data-i18n="info_location">Location:</span>
+                <strong data-i18n="info_location_value">Casablanca, Morocco</strong>
+              </div>
+              <div class="info__row">
+                <span data-i18n="info_email">Email:</span>
+                <strong data-i18n="info_email_value">raisshiba.dev@email.com</strong>
+              </div>
+              <div class="info__row">
+                <span data-i18n="info_exp">Experience:</span>
+                <strong data-i18n="info_exp_value">3 years</strong>
+              </div>
+              <div class="info__row">
+                <span data-i18n="info_freelance">Freelance:</span>
+                <strong data-i18n="available">Available</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section__spacer"></div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h2 data-i18n="education_title">Education</h2>
+            <div class="timeline">
+              <div class="tl">
+                <div class="tl__date" data-i18n="education_date_1">2024 — 2026</div>
+                <div class="tl__content">
+                  <h3 data-i18n="education_school_1">EMSI Engineering School</h3>
+                  <p class="muted" data-i18n="education_desc_1">
+                    Integrated Preparatory Program (2 years)
+                    Computer Science Engineering (3rd year)
+                  </p>
+                </div>
+              </div>
+              <div class="tl">
+                <div class="tl__date" data-i18n="education_date_2">2022 — 2023</div>
+                <div class="tl__content">
+                  <h3 data-i18n="education_school_2">High School – Ouled Hriz El Gharbia</h3>
+                  <p class="muted" data-i18n="education_desc_2">
+                    High School Diploma in Physical Sciences (Physics & Chemistry)
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 data-i18n="experience_title">Experiences</h2>
+            <div class="timeline">
+              <div class="tl">
+                <div class="tl__date" data-i18n="exp_date_1">2025</div>
+                <div class="tl__content">
+                  <h3 data-i18n="exp_title_1">Internship</h3>
+                  <p class="muted" data-i18n="exp_desc_1">
+                    SOFALIM — Observation internship within the Information Systems (IS) department,
+                    gaining exposure to IT infrastructure, data management, and internal systems.
+                  </p>
+                </div>
+              </div>
+              <div class="tl">
+                <div class="tl__date" data-i18n="exp_date_2">2024</div>
+                <div class="tl__content">
+                  <h3 data-i18n="exp_title_2">Personal Projects</h3>
+                  <p class="muted" data-i18n="exp_desc_2">Development of multiple academic and personal web projects.</p><br>  
+                  <a href="projects.html" class="nav__link" style="background-color: rgb(98, 98, 100);margin-left: 20px; color: white;" data-i18n="view_projects">View projects</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="muted">© <span id="year"></span> <span data-i18n="brand_name">Hiba Raiss</span></p>
+     
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
