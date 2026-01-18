@@ -106,7 +106,7 @@ const translations = {
     info_location: "Location:",
     info_location_value: "Casablanca, Morocco",
     info_email: "Email:",
-    info_email_value: "raisshiba.dev@email.com",
+    info_email_value: "raisshiba.dev@gmail.com",
     info_exp: "Experience:",
     info_exp_value: "3 years",
     info_freelance: "Freelance:",
@@ -160,8 +160,8 @@ const translations = {
     
     // Certifications
     certifications_title: "Certifications / Training",
-    cert_1: "Certificate 1 — coursera : c++/cpp",
-    cert_2: "Certificate 2 — Coursera : javascript",
+    cert_1: "Certificate 1 — Coursera: C++/CPP",
+    cert_2: "Certificate 2 — Coursera: JavaScript",
     cert_3: "Training Program — ALX",
     
     // Strengths
@@ -187,6 +187,7 @@ const translations = {
     filter_all: "All",
     filter_frontend: "Front-end",
     filter_fullstack: "Full-stack",
+    filter_symfony: "Symfony",
     filter_php: "PHP",
     filter_javascript: "JavaScript",
     
@@ -248,7 +249,7 @@ const translations = {
     info_location: "Localisation :",
     info_location_value: "Casablanca, Maroc",
     info_email: "Email :",
-    info_email_value: "raisshiba.dev@email.com",
+    info_email_value: "raisshiba.dev@gmail.com",
     info_exp: "Expérience :",
     info_exp_value: "3 ans",
     info_freelance: "Freelance :",
@@ -302,8 +303,8 @@ const translations = {
     
     // Certifications
     certifications_title: "Certifications / Formations",
-    cert_1: "Certificate 1 — coursera : c++/cpp",
-    cert_2: "Certificate 2 — Coursera : javascript",
+    cert_1: "Certificat 1 — Coursera : C++/CPP",
+    cert_2: "Certificat 2 — Coursera : JavaScript",
     cert_3: "Programme de formation — ALX",
     
     // Strengths
@@ -329,6 +330,7 @@ const translations = {
     filter_all: "Tous",
     filter_frontend: "Front-end",
     filter_fullstack: "Full-stack",
+    filter_symfony: "Symfony",
     filter_php: "PHP",
     filter_javascript: "JavaScript",
     
@@ -341,7 +343,7 @@ const translations = {
     project1_desc: "Une application web full-stack pour gérer les étudiants, les classes et les dossiers scolaires. Elle fournit une gestion structurée des données et des fonctionnalités administratives.",
     project2_title: "Site Web de Menu Restaurant",
     project2_desc: "Un site web de menu restaurant responsive avec navigation interactive, conçu pour améliorer l'expérience utilisateur et la clarté visuelle.",
-   project3_title: "Système de Gestion d'Utilisateurs",
+    project3_title: "Système de Gestion d'Utilisateurs",
     project3_desc: "Un système web pour gérer les comptes utilisateurs, rôles et permissions, développé en utilisant PHP et JavaScript dans un environnement serveur local.",
     
     // Contact page
@@ -447,65 +449,7 @@ function loadLanguage() {
   setLanguage(langToUse);
 }
 
-/* 🔹 INITIALISATION COMPLÈTE */
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  console.log("Initialisation du site...");
-  
-  // Initialiser le thème
-  initTheme();
-  
-  // Initialiser les années du footer
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
-  }
-  
-  // Initialiser la langue
-  loadLanguage();
-
-    // Initialiser les filtres de projets
-  initProjectsFilter(); 
-
-  
-  // Gestionnaires pour les boutons de langue
-  document.querySelectorAll('.lang-btn').forEach(button => {
-    button.addEventListener('click', function(e) {
-      e.preventDefault();
-      const lang = this.getAttribute('data-lang');
-      if (lang) {
-        setLanguage(lang);
-      }
-    });
-
-
-  }
-
-
-
-);
-  
-  // Pour compatibilité avec les anciens boutons onclick
-  const oldLangButtons = document.querySelectorAll('button[onclick*="setLanguage("]');
-  oldLangButtons.forEach(btn => {
-    const oldOnClick = btn.getAttribute('onclick');
-    if (oldOnClick) {
-      btn.removeAttribute('onclick');
-      const langMatch = oldOnClick.match(/setLanguage\('(\w+)'\)/);
-      if (langMatch) {
-        btn.classList.add('lang-btn');
-        btn.setAttribute('data-lang', langMatch[1]);
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          setLanguage(langMatch[1]);
-        });
-      }
-    }
-  });
-  
-  console.log("Initialisation terminée");
-});
-// ========== PROJECTS FILTER & SEARCH ==========
+/* 🔹 PROJECTS FILTER & SEARCH */
 function initProjectsFilter() {
   const projectsGrid = document.getElementById('projectsGrid');
   const filterButtons = document.querySelectorAll('.segmented__btn[data-filter]');
@@ -533,8 +477,14 @@ function initProjectsFilter() {
       
       if (categoryMatch && searchMatch) {
         project.style.display = 'block';
+        project.style.opacity = '1';
+        project.style.transform = 'translateY(0)';
       } else {
-        project.style.display = 'none';
+        project.style.opacity = '0';
+        project.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+          project.style.display = 'none';
+        }, 200);
       }
     });
   }
@@ -554,10 +504,91 @@ function initProjectsFilter() {
   // Gestion de la recherche en temps réel
   if (searchInput) {
     searchInput.addEventListener('input', filterProjects);
+    // Ajouter un bouton de réinitialisation de recherche
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        searchInput.value = '';
+        filterProjects();
+      }
+    });
   }
   
   // Initialiser avec tous les projets visibles
   filterProjects();
+  
+  // Ajouter des styles pour l'animation
+  projects.forEach(project => {
+    project.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  });
 }
+
+/* 🔹 HIGHLIGHT ACTIVE NAV LINK */
+function highlightActiveNav() {
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const navLinks = document.querySelectorAll('.nav__link');
+  
+  navLinks.forEach(link => {
+    const linkHref = link.getAttribute('href');
+    if (linkHref === currentPage) {
+      link.classList.add('is-active');
+    } else {
+      link.classList.remove('is-active');
+    }
+  });
+}
+
+/* 🔹 INITIALISATION COMPLÈTE */
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("Initialisation du site...");
+  
+  // Initialiser le thème
+  initTheme();
+  
+  // Initialiser les années du footer
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+  
+  // Initialiser la langue
+  loadLanguage();
+  
+  // Initialiser les filtres de projets
+  initProjectsFilter();
+  
+  // Mettre en surbrillance le lien actif
+  highlightActiveNav();
+  
+  // Gestionnaires pour les boutons de langue
+  document.querySelectorAll('.lang-btn').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      const lang = this.getAttribute('data-lang');
+      if (lang) {
+        setLanguage(lang);
+      }
+    });
+  });
+  
+  // Pour compatibilité avec les anciens boutons onclick
+  const oldLangButtons = document.querySelectorAll('button[onclick*="setLanguage("]');
+  oldLangButtons.forEach(btn => {
+    const oldOnClick = btn.getAttribute('onclick');
+    if (oldOnClick) {
+      btn.removeAttribute('onclick');
+      const langMatch = oldOnClick.match(/setLanguage\('(\w+)'\)/);
+      if (langMatch) {
+        btn.classList.add('lang-btn');
+        btn.setAttribute('data-lang', langMatch[1]);
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          setLanguage(langMatch[1]);
+        });
+      }
+    }
+  });
+  
+  console.log("Initialisation terminée");
+});
+
 // Rendre la fonction accessible globalement pour la compatibilité
 window.setLanguage = setLanguage;
