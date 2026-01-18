@@ -173,7 +173,7 @@ button,input,textarea{font:inherit}
 }
 
 /* ===== Projects ===== */
-.projects__controls{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;justify-content:flex-end}
+.projects__controls{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;justify-content:space-between;width:100%}
 .projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}
 .project__top{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-bottom:.5rem}
 .project__badge{font-size:.85rem;color:var(--muted);border:1px solid var(--line);background:rgba(255,255,255,.04);padding:.25rem .55rem;border-radius:999px}
@@ -182,15 +182,47 @@ button,input,textarea{font:inherit}
 .project__actions{display:flex;gap:.5rem;flex-wrap:wrap}
 .fav-btn.is-fav{border-color:rgba(124,92,255,.45);background:rgba(124,92,255,.14)}
 
-/* Segmented */
-.segmented{display:flex;border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.segmented__btn{padding:.55rem .8rem;background:transparent;border:0;color:var(--muted);cursor:pointer}
-.segmented__btn:hover{color:var(--text);background:rgba(255,255,255,.04)}
-.segmented__btn.is-active{color:var(--text);background:rgba(124,92,255,.14)}
+/* ===== Segmented (Filters) ===== */
+.segmented{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(100px, 1fr));
+  gap:0.5rem;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  padding:0.25rem;
+  background:rgba(255,255,255,.02);
+  width:100%;
+  max-width:600px;
+}
+
+.segmented__btn{
+  padding:0.6rem 0.5rem;
+  background:transparent;
+  border:0;
+  color:var(--muted);
+  cursor:pointer;
+  text-align:center;
+  font-size:0.9rem;
+  white-space:nowrap;
+  border-radius:10px;
+  transition:all 0.2s ease;
+}
+
+.segmented__btn:hover{
+  color:var(--text);
+  background:rgba(255,255,255,.05);
+}
+
+.segmented__btn.is-active{
+  color:var(--text);
+  background:rgba(124,92,255,.15);
+  border:1px solid rgba(124,92,255,.3);
+}
 
 /* Inputs */
 .input{
-  width:min(320px,100%);padding:.65rem .8rem;border-radius:14px;
+  width:min(300px,100%);padding:.65rem .8rem;border-radius:14px;
   border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);outline:none;
 }
 .input:focus{border-color:rgba(51,209,255,.45);box-shadow:0 0 0 4px rgba(51,209,255,.10)}
@@ -242,7 +274,17 @@ button,input,textarea{font:inherit}
 .modal__meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
 .modal__foot{border-top:1px solid var(--line);padding-top:.8rem;display:flex;justify-content:flex-end}
 
-/* Responsive */
+/* ===== Profile Image ===== */
+.profile-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  margin: 1rem 0;
+}
+
+/* ===== Responsive ===== */
 @media (max-width:980px){
   .hero__grid{grid-template-columns:1fr}
   .projects{grid-template-columns:1fr}
@@ -250,106 +292,86 @@ button,input,textarea{font:inherit}
   .grid-2{grid-template-columns:1fr}
   .tl{grid-template-columns:1fr}
 }
+
 @media (max-width:720px){
-  .nav__toggle{display:inline-flex;align-items:center;justify-content:center}
+  .nav__toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+  }
+  
   .nav__menu{
-    position:absolute; right:1rem; top:70px; display:none;
-    flex-direction:column; align-items:stretch;
+    position:absolute;
+    right:1rem;
+    top:70px;
+    display:none;
+    flex-direction:column;
+    align-items:stretch;
     width:min(320px,calc(100% - 2rem));
-    padding:.6rem; border-radius:18px;
+    padding:.6rem;
+    border-radius:18px;
     border:1px solid var(--line);
-    background:rgba(10,16,30,.75);
+    background:rgba(10,16,30,.95); /* Plus opaque pour dark mode */
     backdrop-filter:blur(12px);
     box-shadow:var(--shadow);
+    z-index:1000;
   }
-  :root.light .nav__menu{background:rgba(255,255,255,.85)}
-  .nav__menu.is-open{display:flex}
-  .nav__link{padding:.7rem .8rem}
-}
-/* ===============================
-   PROJECTS : SEARCH + FILTERS
-   Search LEFT – Filters RIGHT
-================================ */
-
-.projects__controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* clé */
-  gap: 1rem;
-  width: 100%;
-}
-
-/* Search input (left) */
-.projects__controls .input {
-  width: 542px;
-  max-width: 100%;
-}
-.segmented {
-  width: 542px;
-  max-width: 100%;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 colonnes égales */
-  gap: 0.5rem;
-}
-
-.segmented__btn {
-  width: 100%;
-  text-align: center;
-  padding: 0.75rem 0.5rem;
-}
-
-/* ===============================
-   RESPONSIVE
-================================ */
-
-@media (max-width: 768px) {
-  .projects__controls {
-    flex-direction: column;
-    align-items: stretch;
+  
+  :root.light .nav__menu{
+    background:rgba(255,255,255,.95);
   }
-
-  .projects__controls .input {
-    width: 100%;
+  
+  .nav__menu.is-open{
+    display:flex;
   }
-
-  .projects__controls .segmented {
-    justify-content: flex-start;
+  
+  .nav__link{
+    padding:.7rem .8rem;
+    color:var(--text); /* Forcer la couleur du texte */
+    border:1px solid var(--line);
+    margin:0.2rem 0;
+    background:rgba(255,255,255,.05);
+  }
+  
+  :root.light .nav__link{
+    background:rgba(11,18,32,.05);
+  }
+  
+  .nav__link:hover{
+    background:rgba(124,92,255,.1);
+  }
+  
+  /* Ajuster les boutons dans le menu mobile */
+  .nav__menu .btn{
+    margin:0.2rem 0;
+    justify-content:center;
+  }
+  
+  /* Projects controls responsive */
+  .projects__controls{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  
+  .projects__controls .input{
+    width:100%;
+  }
+  
+  .segmented{
+    grid-template-columns:repeat(3, 1fr);
   }
 }
-/* Styles pour les boutons de langue */
-.lang-btn.active {
-  background-color: var(--color-primary);
-  color: white;
+
+@media (max-width:480px){
+  .segmented{
+    grid-template-columns:repeat(2, 1fr);
+  }
+  
+  .profile-image{
+    width:150px;
+    height:150px;
+  }
 }
-
-.lang-btn.active:hover {
-  background-color: var(--color-primary-dark);
-}
-
-/* Styles pour les tags dans skills */
-.tags .tag {
-  display: inline-block;
-  margin: 0.25rem;
-  padding: 0.25rem 0.75rem;
-  background-color: var(--color-bg-light);
-  border-radius: 2rem;
-  font-size: 0.875rem;
-}
-
-/* Styles pour le menu mobile */
-.nav__menu.is-open {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background-color: var(--color-bg);
-  padding: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-
 
 /* Fixer le footer avec Grid */
 body {
@@ -370,6 +392,8 @@ main {
   grid-row: 3;
 }
 
-/* ===============================
-   PROJECTS : SEARCH + FILTERS
-================================ */
+/* Styles pour les boutons de langue actifs */
+.lang-btn.active {
+  background-color: rgba(124,92,255,.2);
+  border-color: rgba(124,92,255,.5);
+}
