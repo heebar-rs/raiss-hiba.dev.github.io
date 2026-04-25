@@ -3,100 +3,139 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title data-i18n="page_title_contact">Contact | Hiba Raiss</title>
+  <title data-i18n="page_title_contact">Contact — Hiba Raiss</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
 
-<!-- ================= HEADER ================= -->
 <header class="header">
   <div class="container header__inner">
-
     <a class="brand" href="index.html">
       <span class="brand__text" data-i18n="brand_name">Hiba Raiss</span>
     </a>
-
     <nav class="nav">
-      <button class="nav__toggle" id="navToggle" aria-expanded="false">
-        <span class="nav__toggle-lines"></span>
-        <span class="sr-only" data-i18n="menu_toggle">Menu</span>
+      <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu">
+        <span class="nav__toggle-lines" aria-hidden="true"></span>
+        <span class="sr-only">Menu</span>
       </button>
-
       <div class="nav__menu" id="navMenu">
-        <a class="nav__link" href="index.html" data-i18n="nav_profile">Profile</a> <!-- AJOUTER LE TEXTE ICI -->
-        <a class="nav__link" href="skills.html" data-i18n="nav_skills">Skills</a> <!-- AJOUTER LE TEXTE ICI -->
-        <a class="nav__link" href="projects.html" data-i18n="nav_projects">Projects</a> <!-- AJOUTER LE TEXTE ICI -->
-        <a class="nav__link" href="contact.html" data-i18n="nav_contact">Contact</a> <!-- AJOUTER LE TEXTE ICI -->
-
-        <!-- Theme -->
-        <button class="btn btn--ghost" id="themeToggle" type="button">
-          <span id="themeIcon">🌙</span>
+        <a class="nav__link" href="index.html"    data-i18n="nav_profile">Profile</a>
+        <a class="nav__link" href="skills.html"   data-i18n="nav_skills">Skills</a>
+        <a class="nav__link" href="projects.html" data-i18n="nav_projects">Projects</a>
+        <a class="nav__link" href="contact.html"  data-i18n="nav_contact">Contact</a>
+        <button class="btn btn--ghost" id="themeToggle" type="button" aria-label="Toggle theme">
+          <span id="themeIcon" aria-hidden="true">☀️</span>
         </button>
-
-        <!-- Language buttons -->
-        <button class="btn btn--ghost" onclick="setLanguage('fr')">FR</button>
-        <button class="btn btn--ghost" onclick="setLanguage('en')">EN</button> <!-- CORRIGER ICI -->
-        
+        <button class="btn btn--ghost lang-btn" data-lang="en" type="button">EN</button>
+        <button class="btn btn--ghost lang-btn" data-lang="fr" type="button">FR</button>
       </div>
     </nav>
-
   </div>
 </header>
 
-<!-- ================= MAIN ================= -->
 <main>
-  <section class="section">
-    <div class="container">
+<section class="section">
+<div class="container">
 
-      <!-- Page header -->
-      <div class="pagehead">
-        <h1 data-i18n="contact_title">Contact</h1>
+  <div class="pagehead">
+
+    <h1 data-i18n="contact_title">Get in Touch</h1>
+    <p class="muted" data-i18n="contact_intro_1">Open to internships, freelance projects, and collaboration opportunities.</p>
+  </div>
+
+  <div class="grid-2">
+
+    <!-- Contact card -->
+    <div class="card">
+      <h2 data-i18n="contact_get_in_touch">Reach Out</h2>
+      <p class="muted" style="margin-bottom:1rem" data-i18n="contact_intro_2">Feel free to contact me through any of the channels below:</p>
+
+      <div class="contact-list">
+        <a class="contact-item" href="mailto:raisshiba07@gmail.com">
+          <span class="contact-icon">✉️</span>
+          <span>
+            <span style="color:var(--muted);font-size:.82rem;display:block" data-i18n="contact_email_label">Email</span>
+            raisshiba07@gmail.com
+          </span>
+        </a>
+        <a class="contact-item" href="tel:+212631827136">
+          <span class="contact-icon">📞</span>
+          <span>
+            <span style="color:var(--muted);font-size:.82rem;display:block" data-i18n="contact_phone_label">Phone</span>
+            +212 6 31 82 71 36
+          </span>
+        </a>
+        <a class="contact-item" href="https://www.linkedin.com/in/hibaraiss" target="_blank" rel="noreferrer">
+          <span class="contact-icon">💼</span>
+          <span>
+            <span style="color:var(--muted);font-size:.82rem;display:block">LinkedIn</span>
+            linkedin.com/in/hibaraiss
+          </span>
+        </a>
+        <a class="contact-item" href="https://github.com/heebar-rs" target="_blank" rel="noreferrer">
+          <span class="contact-icon">🧑‍💻</span>
+          <span>
+            <span style="color:var(--muted);font-size:.82rem;display:block">GitHub</span>
+            github.com/heebar-rs
+          </span>
+        </a>
       </div>
 
-      <!-- Contact layout -->
-      <div class="contact-layout">
-
-        <!-- Contact card -->
-        <div class="card contact-card">
-          <h2 data-i18n="contact_get_in_touch">Get in Touch</h2>
-          <p class="muted" data-i18n="contact_intro_1">I'm always open to discussing new opportunities, projects, or collaborations.</p>
-          <p class="muted" data-i18n="contact_intro_2">Feel free to reach out using any of the channels below :</p>
-        
-
-          <div class="contact-list">
-            <a class="contact-item" href="mailto:raisshiba.dev@gmail.com">
-              <span aria-hidden="true">✉️</span>
-              <span data-i18n="contact_email_label">Email</span>: raisshiba.dev@gmail.com
-            </a>
-
-            <a class="contact-item"
-               href="https://www.linkedin.com/in/hibaraiss"
-               target="_blank" rel="noreferrer">
-              <span aria-hidden="true">💼</span>
-              LinkedIn
-            </a>
-
-            <a class="contact-item"
-               href="https://github.com/heebar-rs"
-               target="_blank" rel="noreferrer">
-              <span aria-hidden="true">🧑‍💻</span>
-              GitHub
-            </a>
-          </div>
-
-          <div class="section__spacer"></div>
-
-          <h3 data-i18n="contact_availability">Availability</h3>
-          <p class="muted" data-i18n="contact_availability_text">Freelance · Internship · Open to opportunities</p>
+      <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--line)">
+        <h3 style="font-size:1rem;margin-bottom:.5rem" data-i18n="contact_availability">Availability</h3>
+        <div class="avail-badge" style="margin-bottom:.5rem">
+          <span class="avail-dot"></span>
+          <span data-i18n="avail_status">Looking for Summer Internship (PFA) — 1 to 2 months</span>
         </div>
-
+        <div class="tags">
+          <span class="tag tag--accent" data-i18n="avail_tag_1">Internship</span>
+          <span class="tag tag--accent" data-i18n="avail_tag_2">Freelance</span>
+          <span class="tag" data-i18n="avail_tag_3">Open to opportunities</span>
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- Quick info -->
+    <div style="display:grid;gap:1rem;align-content:start">
+      <div class="card">
+        <h2 data-i18n="contact_profile_label">Profile Snapshot</h2>
+        <div class="info" style="margin-top:.5rem">
+          <div class="info__row">
+            <span data-i18n="info_location">Location</span>
+            <strong>Casablanca, Morocco</strong>
+          </div>
+          <div class="info__row">
+            <span data-i18n="contact_school">School</span>
+            <strong>EMSI Casablanca</strong>
+          </div>
+          <div class="info__row">
+            <span data-i18n="contact_stack">Stack</span>
+            <strong>PHP · Python · Django · Symfony</strong>
+          </div>
+          <div class="info__row">
+            <span data-i18n="contact_response">Response</span>
+            <strong data-i18n="contact_response_val">Within 24h</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="contact_cv_title">Download CV</h2>
+        <p class="muted" style="font-size:.9rem;margin-bottom:1rem" data-i18n="contact_cv_desc">Download my full resume in PDF format.</p>
+        <a class="btn btn--primary" href="CV_HIBA_RAISS.pdf" download>
+          ⬇ <span data-i18n="contact_cv_btn">Download CV (PDF)</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</section>
 </main>
 
-<!-- ================= FOOTER ================= -->
 <footer class="footer">
   <div class="container footer__inner">
     <p class="muted">© <span id="year"></span> <span data-i18n="brand_name">Hiba Raiss</span></p>
