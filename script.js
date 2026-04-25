@@ -1,594 +1,481 @@
-// ========== MOBILE MENU ==========
+/* =========================================
+   HIBA RAISS — PORTFOLIO SCRIPT
+   Mobile menu, theme, i18n, filters
+   ========================================= */
+
+/* ========== MOBILE MENU ========== */
 const navToggle = document.getElementById("navToggle");
-const navMenu = document.getElementById("navMenu");
+const navMenu   = document.getElementById("navMenu");
 
 if (navToggle && navMenu) {
   navToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("is-open");
-    const isExpanded = navMenu.classList.contains("is-open");
-    navToggle.setAttribute("aria-expanded", isExpanded);
+    const isOpen = navMenu.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", isOpen);
   });
-
-  // Fermer le menu en cliquant à l'extérieur
-  document.addEventListener("click", (event) => {
-    if (!navToggle.contains(event.target) && !navMenu.contains(event.target)) {
+  document.addEventListener("click", e => {
+    if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
       navMenu.classList.remove("is-open");
       navToggle.setAttribute("aria-expanded", false);
     }
   });
 }
 
-// ========== FOOTER YEAR ==========
-const yearElement = document.getElementById("year");
-if (yearElement) {
-  yearElement.textContent = new Date().getFullYear();
-}
+/* ========== FOOTER YEAR ========== */
+const yearEl = document.getElementById("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// ========== THEME MANAGEMENT ==========
-function getSystemTheme() {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-}
-
+/* ========== THEME ========== */
 function applyTheme(theme) {
-  const root = document.documentElement;
-  const body = document.body;
-  
-  // Retirer toutes les classes de thème
-  root.classList.remove('dark', 'light', 'dark-theme', 'light-theme');
-  body.classList.remove('dark', 'light', 'dark-theme', 'light-theme');
-  
-  // Ajouter la classe du thème sélectionné
-  if (theme === 'dark') {
-    root.classList.add('dark');
-    body.classList.add('dark');
-  } else {
-    root.classList.add('light');
-    body.classList.add('light');
-  }
-  
-  // Mettre à jour l'icône
-  const themeIcon = document.getElementById('themeIcon');
-  if (themeIcon) {
-    themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
-  }
-  
-  // Sauvegarder dans localStorage
-  localStorage.setItem('theme', theme);
-}
-
-function toggleTheme() {
-  const isDark = document.documentElement.classList.contains('dark');
-  const newTheme = isDark ? 'light' : 'dark';
-  applyTheme(newTheme);
+  document.documentElement.classList.toggle("light", theme === "light");
+  const icon = document.getElementById("themeIcon");
+  if (icon) icon.textContent = theme === "light" ? "🌙" : "☀️";
+  localStorage.setItem("theme", theme);
 }
 
 function initTheme() {
-  const savedTheme = localStorage.getItem('theme');
-  const systemTheme = getSystemTheme();
-  
-  // Utiliser le thème sauvegardé ou le thème système
-  const themeToApply = savedTheme || systemTheme;
-  applyTheme(themeToApply);
-  
-  // Ajouter l'événement au bouton
-  const themeToggle = document.getElementById('themeToggle');
-  if (themeToggle) {
-    themeToggle.addEventListener('click', toggleTheme);
-  }
+  const saved  = localStorage.getItem("theme");
+  const system = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  applyTheme(saved || system);
+  const btn = document.getElementById("themeToggle");
+  if (btn) btn.addEventListener("click", () => {
+    applyTheme(document.documentElement.classList.contains("light") ? "dark" : "light");
+  });
 }
 
-/* ========== MULTI LANGUAGE SYSTEM ========== */
+/* ========== TRANSLATIONS ========== */
 const translations = {
   en: {
-    // Navigation (all pages)
-    nav_profile: "Profile",
-    nav_skills: "Skills",
+    /* Nav */
+    nav_profile:  "Profile",
+    nav_skills:   "Skills",
     nav_projects: "Projects",
-    nav_contact: "Contact",
-    brand_name: "Hiba Raiss",
-    menu_toggle: "Menu",
-    
-    // Page titles
-    page_title_home: "Profile | Hiba Raiss",
-    page_title_skills: "Skills | Hiba Raiss",
-    page_title_projects: "Projects | Hiba Raiss",
-    page_title_contact: "Contact | Hiba Raiss",
-    
-    // Home page
-    profile_heading: "My Profile",
-    about_title: "About Me",
-    about_text: "I am Hiba Raiss, a passionate full-stack web developer. I specialize in building clean, efficient, and user-friendly web applications. I have experience working on academic and personal projects including showcase websites, dashboards, and dynamic web platforms.",
-    info_title: "Information",
-    info_name: "Name:",
-    info_name_value: "Hiba Raiss",
-    info_age: "Age:",
-    info_age_value: "20",
-    info_location: "Location:",
+    nav_contact:  "Contact",
+    brand_name:   "Hiba Raiss",
+    menu_toggle:  "Menu",
+
+    /* Page titles */
+    page_title_home:     "Profile — Hiba Raiss",
+    page_title_skills:   "Skills — Hiba Raiss",
+    page_title_projects: "Projects — Hiba Raiss",
+    page_title_contact:  "Contact — Hiba Raiss",
+
+    /* Profile / Home */
+    profile_heading:  "My Profile",
+    profile_sub:      "Computer Science Engineering Student · Full-Stack Developer",
+    about_title:      "About Me",
+    about_text:       "I am Hiba Raiss, a third-year Computer Science Engineering student at EMSI Casablanca. Passionate about building clean, efficient web applications — from elegant frontends to robust backends. I combine academic rigor with hands-on project experience across PHP, Python, Symfony, Django, and more.",
+    available:        "Available for opportunities",
+    available_short:  "Available",
+
+    stat_projects: "Projects",
+    stat_certs:    "Certifications",
+    stat_langs:    "Languages",
+
+    info_title:        "Information",
+    info_name:         "Name",
+    info_name_value:   "Hiba Raiss",
+    info_age:          "Age",
+    info_age_value:    "21",
+    info_location:     "Location",
     info_location_value: "Casablanca, Morocco",
-    info_email: "Email:",
-    info_email_value: "raisshiba.dev@gmail.com",
-    info_exp: "Experience:",
-    info_exp_value: "3 years",
-    info_freelance: "Freelance:",
-    available: "Available",
-    
-    // Tags
-    tag_fullstack: "Full-stack Development",
-    tag_symfony: "Symfony",
-    tag_laravel: "Laravel",
-    
-    // Education
+    info_email:        "Email",
+    info_phone:        "Phone",
+    info_level:        "Level",
+    info_level_value:  "3rd Year — Engineering Cycle",
+    info_freelance:    "Status",
+
+    /* Education */
     education_title: "Education",
-    education_date_1: "2024 — 2026",
-    education_school_1: "EMSI Engineering School",
-    education_desc_1: "Integrated Preparatory Program (2 years) Computer Science Engineering (3rd year)",
-    education_date_2: "2022 — 2023",
-    education_school_2: "High School – Ouled Hriz El Gharbia",
-    education_desc_2: "High School Diploma in Physical Sciences (Physics & Chemistry)",
-    
-    // Experience
-    experience_title: "Experiences",
-    exp_date_1: "2025",
-    exp_title_1: "Internship",
-    exp_desc_1: "SOFALIM — Observation internship within the Information Systems (IS) department, gaining exposure to IT infrastructure, data management, and internal systems.",
-    exp_date_2: "2024",
-    exp_title_2: "Personal Projects",
-    exp_desc_2: "Development of multiple academic and personal web projects.",
-    view_projects: "View projects",
-    
-    // Skills page
-    skills_title: "My Skills",
-    skills_intro: "Here are my technical skills and competencies:",
-    skills_web: "Languages & Web",
-    frameworks_title: "Frameworks",
-    skill_html: "HTML / CSS",
-    skill_php: "PHP",
-    skill_javascript: "JavaScript",
-    skill_level_advanced: "Advanced",
-    skill_level_intermediate: "Intermediate",
-    skill_level_beginner: "Beginner",
-    framework_laravel: "Laravel",
-    framework_symfony: "Symfony",
-    
-    // Tools
-    tools_title: "Tools",
-    tool_git: "Git / GitHub",
-    tool_figma: "Figma",
-    tool_vscode: "VS Code",
-    tool_xampp: "XAMPP",
-    tool_symfony_laravel: "Symfony / Laravel",
-    
-    // Certifications
-    certifications_title: "Certifications / Training",
-    cert_1: "Certificate 1 — Coursera: C++/CPP",
-    cert_2: "Certificate 2 — Coursera: JavaScript",
-    cert_3: "Training Program — ALX",
-    
-    // Strengths
-    strengths_title: "Professional Strengths",
-    strength_1: "Strong collaboration and teamwork skills",
-    strength_2: "Ability to work independently and stay organized",
-    strength_3: "Clear communication and presentation skills",
-    strength_4: "Effective time management",
-    
-    // Languages
+    edu_date_1:  "2025 — Now",
+    edu_school_1:"EMSI — Engineering Cycle",
+    edu_desc_1:  "Computer Science Engineering (3rd year) — Software Engineering specialization, Casablanca.",
+    edu_date_2:  "2023 — 2025",
+    edu_school_2:"EMSI — Preparatory Cycle",
+    edu_desc_2:  "Integrated 2-year preparatory program in mathematics, physics and computer science fundamentals.",
+    edu_date_3:  "2022 — 2023",
+    edu_school_3:"High School — Ouled Hriz El Gharbia",
+    edu_desc_3:  "Baccalaureate in Physical Sciences (Physics & Chemistry) — Had Soualem.",
+
+    /* Experience */
+    experience_title: "Experience",
+    exp_date_1:  "Jun–Jul 2025",
+    exp_title_1: "Internship · SOFALIM",
+    exp_desc_1:  "Observation internship in the IS department: SAP data entry & verification, internal database management, administrative support and ERP system discovery.",
+    exp_date_2:  "2025 — 2026",
+    exp_title_2: "President — Club Career Forward",
+    exp_desc_2:  "Leading student community, organizing professional events, managing member engagement at EMSI Casablanca.",
+    exp_date_3:  "2024 — 2026",
+    exp_title_3: "Academic & Personal Projects",
+    exp_desc_3:  "Development of 5+ web applications using PHP, Python/Django, Symfony, and more.",
+    view_projects: "View Projects →",
+
+    /* Engagement */
+    engagement_title:   "Engagement & Volunteering",
+    leader_1_title:     "President of Engagement & Members — Club Career Forward (2026)",
+    leader_1_desc:      "Student community leadership, professional event organization, member engagement and follow-up.",
+    leader_2_title:     "Support — Hult Prize EMSI (2026)",
+    leader_2_desc:      "Organizational support at the Hult Prize Opening Ceremony at EMSI Casablanca.",
+    leader_3_title:     "Volunteer — KOFA Initiative, Ramadan (2025)",
+    leader_3_desc:      "Participated in preparation and distribution of meals during Ramadan.",
+
+    /* Skills */
+    skills_title:   "My Skills",
+    skills_intro:   "Technical competencies, tools and professional strengths.",
+    skills_web:     "Programming Languages & Web",
+    frameworks_title: "Frameworks & Databases",
+    tools_title:    "Tools & Environment",
+    methods_label:  "Methods",
+    strengths_title:"Professional Strengths",
+    strength_1: "Analytical mindset and problem-solving skills",
+    strength_2: "Strong teamwork and collaboration abilities",
+    strength_3: "Fast learner, autonomous and organized",
+    strength_4: "Clear communication and presentation skills",
+    strength_5: "Effective time management",
+
+    skill_level_advanced:    "Advanced",
+    skill_level_intermediate:"Intermediate",
+    skill_level_beginner:    "Beginner",
+
     languages_title: "Languages",
-    lang_french: "French",
+    lang_arabic:  "Arabic",
+    lang_french:  "French",
     lang_english: "English",
-    lang_arabic: "Arabic",
-    lang_intermediate: "Intermediate",
-    lang_fluent: "Fluent",
-    lang_native: "Native",
-    
-    // Projects page
+    lang_native:  "Native",
+    lang_fluent:  "Fluent",
+    lang_good:    "Good level",
+
+    certifications_title: "Certifications",
+    cert_1_title: "Python for Web Data Access",
+    cert_1_org:   "University of Michigan — Coursera",
+    cert_2_title: "Software Design & Project Management",
+    cert_2_org:   "UST Hong Kong — Coursera",
+    cert_3_title: "Intro to OOP in C++",
+    cert_3_org:   "École Polytechnique Fédérale de Lausanne — Coursera",
+
+    interests_title: "Interests",
+
+    /* Projects */
     projects_title: "My Projects",
-    projects_intro: "A selection of my recent work:",
-    search_placeholder: "Search project...",
-    filter_all: "All",
+    projects_sub:   "Academic & personal work — 2024–2026",
+    search_placeholder: "Search project…",
+    filter_all:      "All",
     filter_frontend: "Front-end",
-    filter_fullstack: "Full-stack",
-    filter_symfony: "Symfony",
-    filter_php: "PHP",
-    filter_javascript: "JavaScript",
-    
-    // Project badges
+    filter_fullstack:"Full-stack",
+    filter_django:   "Django",
+    filter_symfony:  "Symfony",
+    filter_python:   "Python",
+
     badge_fullstack: "Full-stack",
-    badge_frontend: "Front-end",
-    
-    // Project titles
-    project1_title: "School Management System",
-    project1_desc: "A full-stack web application for managing students, classes, and school records. It provides structured data handling and administrative features.",
-    project2_title: "Restaurant Menu Website",
-    project2_desc: "A responsive restaurant menu website with interactive navigation, designed to improve user experience and visual clarity.",
-    project3_title: "User Management System",
-    project3_desc: "A web-based system for managing user accounts, roles, and permissions, developed using PHP and JavaScript in a local server environment.",
-    
-    // Contact page
-    contact_title: "Contact",
-    contact_get_in_touch: "Get in Touch",
-    contact_intro_1: "I'm always open to discussing new opportunities, projects, or collaborations.",
-    contact_intro_2: "Feel free to reach out using any of the channels below:",
-    contact_email_label: "Email",
-    contact_availability: "Availability",
-    contact_availability_text: "Freelance · Internship · Open to opportunities",
-    
-    // Buttons
+    badge_frontend:  "Front-end",
+
+    project1_title: "Store Management System",
+    project1_desc:  "Web application for store management with Django, featuring full CRUD, automatic sales calculation, an analytics dashboard, and a Python-based simple sales forecasting module.",
+    project2_title: "File Automation Tool",
+    project2_desc:  "System automation tool in Python that sorts, classifies and dynamically organizes documents by category, handles extensions, and improves productivity.",
+    project3_title: "School Management System",
+    project3_desc:  "Full-stack web application to manage students, classes and school records with complete admin features and structured data handling.",
+    project4_title: "User Management System",
+    project4_desc:  "Web system for managing user accounts with full CRUD operations, role management, built with Symfony and XAMPP.",
+    project5_title: "Hospital Management System",
+    project5_desc:  "Web system for managing patient records (CRUD) built in C, demonstrating low-level system programming applied to a real-world use case.",
+    project6_title: "Restaurant Menu Website",
+    project6_desc:  "Responsive restaurant menu website with interactive navigation and clean visual design, focused on UX and readability.",
+
     btn_github: "GitHub",
-    btn_video: "Video Demo",
-    btn_live: "Live Demo",
-    
-    // Footer
+    btn_video:  "Video Demo",
+    btn_live:   "Live Demo",
+
+    /* Contact */
+    contact_title:         "Get in Touch",
+    contact_intro_1:       "Open to internships, freelance projects, and collaboration opportunities.",
+    contact_intro_2:       "Feel free to contact me through any of the channels below:",
+    contact_get_in_touch:  "Reach Out",
+    contact_email_label:   "Email",
+    contact_phone_label:   "Phone",
+    contact_availability:  "Availability",
+    avail_status:          "Looking for Summer Internship (PFA) — 1 to 2 months",
+    avail_tag_1: "Internship",
+    avail_tag_2: "Freelance",
+    avail_tag_3: "Open to opportunities",
+    contact_profile_label: "Profile Snapshot",
+    contact_school:        "School",
+    contact_stack:         "Stack",
+    contact_response:      "Response",
+    contact_response_val:  "Within 24h",
+    contact_cv_title:      "Download CV",
+    contact_cv_desc:       "Download my full resume in PDF format.",
+    contact_cv_btn:        "Download CV (PDF)",
+
     back_to_profile: "← Back to profile",
-    back_to_home: "← Back to Home",
+    back_to_home:    "← Back to Home",
   },
 
   fr: {
-    // Navigation (toutes les pages)
-    nav_profile: "Profil",
-    nav_skills: "Compétences",
+    /* Nav */
+    nav_profile:  "Profil",
+    nav_skills:   "Compétences",
     nav_projects: "Projets",
-    nav_contact: "Contact",
-    brand_name: "Hiba Raiss",
-    menu_toggle: "Menu",
-    
-    // Page titles
-    page_title_home: "Profil | Hiba Raiss",
-    page_title_skills: "Compétences | Hiba Raiss",
-    page_title_projects: "Projets | Hiba Raiss",
-    page_title_contact: "Contact | Hiba Raiss",
-    
-    // Home page
-    profile_heading: "Mon profil",
-    about_title: "À propos de moi",
-    about_text: "Je suis Hiba Raiss, développeuse web full-stack passionnée. Je me spécialise dans la création d'applications web propres, efficaces et conviviales. J'ai de l'expérience dans des projets académiques et personnels incluant des sites vitrines, tableaux de bord et plateformes web dynamiques.",
-    info_title: "Informations",
-    info_name: "Nom :",
-    info_name_value: "Hiba Raiss",
-    info_age: "Âge :",
-    info_age_value: "20",
-    info_location: "Localisation :",
+    nav_contact:  "Contact",
+    brand_name:   "Hiba Raiss",
+    menu_toggle:  "Menu",
+
+    page_title_home:     "Profil — Hiba Raiss",
+    page_title_skills:   "Compétences — Hiba Raiss",
+    page_title_projects: "Projets — Hiba Raiss",
+    page_title_contact:  "Contact — Hiba Raiss",
+
+    profile_heading: "Mon Profil",
+    profile_sub:     "Étudiante en Génie Informatique · Développeuse Full-Stack",
+    about_title:     "À propos",
+    about_text:      "Je suis Hiba Raiss, étudiante en 3e année cycle ingénieur informatique à l'EMSI Casablanca. Passionnée par la création d'applications web efficaces — du frontend élégant au backend robuste. Je combine rigueur académique et expérience projet en PHP, Python, Symfony, Django et plus.",
+    available:       "Disponible pour des opportunités",
+    available_short: "Disponible",
+
+    stat_projects: "Projets",
+    stat_certs:    "Certifications",
+    stat_langs:    "Langues",
+
+    info_title:        "Informations",
+    info_name:         "Nom",
+    info_name_value:   "Hiba Raiss",
+    info_age:          "Âge",
+    info_age_value:    "21",
+    info_location:     "Lieu",
     info_location_value: "Casablanca, Maroc",
-    info_email: "Email :",
-    info_email_value: "raisshiba.dev@gmail.com",
-    info_exp: "Expérience :",
-    info_exp_value: "3 ans",
-    info_freelance: "Freelance :",
-    available: "Disponible",
-    
-    // Tags
-    tag_fullstack: "Développement Full-stack",
-    tag_symfony: "Symfony",
-    tag_laravel: "Laravel",
-    
-    // Education
-    education_title: "Éducation",
-    education_date_1: "2024 — 2026",
-    education_school_1: "École d'Ingénieurs EMSI",
-    education_desc_1: "Programme Préparatoire Intégré (2 ans) Ingénierie Informatique (3ème année)",
-    education_date_2: "2022 — 2023",
-    education_school_2: "Lycée – Ouled Hriz El Gharbia",
-    education_desc_2: "Baccalauréat en Sciences Physiques (Physique & Chimie)",
-    
-    // Experience
+    info_email:        "Email",
+    info_phone:        "Téléphone",
+    info_level:        "Niveau",
+    info_level_value:  "3e année — Cycle Ingénieur",
+    info_freelance:    "Statut",
+
+    education_title: "Formation",
+    edu_date_1:  "2025 — En cours",
+    edu_school_1:"EMSI — Cycle Ingénieur",
+    edu_desc_1:  "Génie Informatique (3e année) — Spécialité Génie Logiciel, Casablanca.",
+    edu_date_2:  "2023 — 2025",
+    edu_school_2:"EMSI — Cycle Préparatoire",
+    edu_desc_2:  "Programme préparatoire intégré (2 ans) en mathématiques, physique et informatique.",
+    edu_date_3:  "2022 — 2023",
+    edu_school_3:"Lycée — Ouled Hriz El Gharbia",
+    edu_desc_3:  "Baccalauréat en Sciences Physiques (Physique & Chimie) — Had Soualem.",
+
     experience_title: "Expériences",
-    exp_date_1: "2025",
-    exp_title_1: "Stage",
-    exp_desc_1: "SOFALIM — Stage d'observation au sein du département des Systèmes d'Information, exposition à l'infrastructure informatique, la gestion des données et les systèmes internes.",
-    exp_date_2: "2024",
-    exp_title_2: "Projets Personnels",
-    exp_desc_2: "Développement de multiples projets web académiques et personnels.",
-    view_projects: "Voir les projets",
-    
-    // Skills page
-    skills_title: "Mes Compétences",
-    skills_intro: "Voici mes compétences techniques et professionnelles :",
-    skills_web: "Langages & Web",
-    frameworks_title: "Frameworks",
-    skill_html: "HTML / CSS",
-    skill_php: "PHP",
-    skill_javascript: "JavaScript",
-    skill_level_advanced: "Avancé",
-    skill_level_intermediate: "Intermédiaire",
-    skill_level_beginner: "Débutant",
-    framework_laravel: "Laravel",
-    framework_symfony: "Symfony",
-    
-    // Tools
-    tools_title: "Outils",
-    tool_git: "Git / GitHub",
-    tool_figma: "Figma",
-    tool_vscode: "VS Code",
-    tool_xampp: "XAMPP",
-    tool_symfony_laravel: "Symfony / Laravel",
-    
-    // Certifications
-    certifications_title: "Certifications / Formations",
-    cert_1: "Certificat 1 — Coursera : C++/CPP",
-    cert_2: "Certificat 2 — Coursera : JavaScript",
-    cert_3: "Programme de formation — ALX",
-    
-    // Strengths
-    strengths_title: "Qualités professionnelles",
-    strength_1: "Excellente collaboration et travail d'équipe",
-    strength_2: "Capacité à travailler de manière autonome et organisée",
-    strength_3: "Bonne communication et présentation",
-    strength_4: "Gestion efficace du temps",
-    
-    // Languages
+    exp_date_1:  "Juin–Juil. 2025",
+    exp_title_1: "Stage d'observation · SOFALIM",
+    exp_desc_1:  "Stage au département SI : saisie & vérification SAP, gestion des bases de données internes, support administratif et découverte des ERP.",
+    exp_date_2:  "2025 — 2026",
+    exp_title_2: "Présidente de l'engagement et des membres — Club Career Forward",
+    exp_desc_2:  "Animation de la communauté étudiante, organisation d'événements professionnels, suivi des membres à l'EMSI Casablanca.",
+    exp_date_3:  "2024 — 2026",
+    exp_title_3: "Projets Académiques & Personnels",
+    exp_desc_3:  "Développement de 5+ applications web avec PHP, Python/Django, Symfony et plus.",
+    view_projects: "Voir les projets →",
+
+    engagement_title:   "Engagement & Bénévolat",
+    leader_1_title:     "Présidente de l'engagement et des membres — Club Career Forward (2026)",
+    leader_1_desc:      "Leadership communautaire, organisation d'événements professionnels, suivi des membres.",
+    leader_2_title:     "Support — Hult Prize EMSI (2026)",
+    leader_2_desc:      "Soutien organisationnel lors de la cérémonie d'ouverture du Hult Prize à l'EMSI.",
+    leader_3_title:     "Bénévole — Initiative KOFA, Ramadan (2025)",
+    leader_3_desc:      "Participation à la préparation et distribution de repas pendant le Ramadan.",
+
+    skills_title:    "Mes Compétences",
+    skills_intro:    "Compétences techniques, outils et atouts professionnels.",
+    skills_web:      "Langages de Programmation & Web",
+    frameworks_title:"Frameworks & Bases de Données",
+    tools_title:     "Outils & Environnement",
+    methods_label:   "Méthodes",
+    strengths_title: "Atouts Professionnels",
+    strength_1: "Esprit d'analyse et résolution de problèmes",
+    strength_2: "Excellente capacité de travail en équipe",
+    strength_3: "Apprentissage rapide, autonome et organisé",
+    strength_4: "Communication claire et présentation",
+    strength_5: "Gestion efficace du temps",
+
+    skill_level_advanced:    "Avancé",
+    skill_level_intermediate:"Intermédiaire",
+    skill_level_beginner:    "Débutant",
+
     languages_title: "Langues",
-    lang_french: "Français",
+    lang_arabic:  "Arabe",
+    lang_french:  "Français",
     lang_english: "Anglais",
-    lang_arabic: "Arabe",
-    lang_intermediate: "Intermédiaire",
-    lang_fluent: "Courant",
-    lang_native: "Maternelle",
-    
-    // Projects page
+    lang_native:  "Langue maternelle",
+    lang_fluent:  "Courant",
+    lang_good:    "Bon niveau",
+
+    certifications_title: "Certifications",
+    cert_1_title: "Python pour l'accès aux données Web",
+    cert_1_org:   "Université du Michigan — Coursera",
+    cert_2_title: "Conception logicielle & Gestion de projets",
+    cert_2_org:   "UST Hong Kong — Coursera",
+    cert_3_title: "Introduction à la POO en C++",
+    cert_3_org:   "École Polytechnique Fédérale de Lausanne — Coursera",
+
+    interests_title: "Centres d'intérêts",
+
     projects_title: "Mes Projets",
-    projects_intro: "Une sélection de mes travaux récents :",
-    search_placeholder: "Rechercher un projet...",
-    filter_all: "Tous",
+    projects_sub:   "Travaux académiques & personnels — 2024–2026",
+    search_placeholder: "Rechercher un projet…",
+    filter_all:      "Tous",
     filter_frontend: "Front-end",
-    filter_fullstack: "Full-stack",
-    filter_symfony: "Symfony",
-    filter_php: "PHP",
-    filter_javascript: "JavaScript",
-    
-    // Project badges
+    filter_fullstack:"Full-stack",
+    filter_django:   "Django",
+    filter_symfony:  "Symfony",
+    filter_python:   "Python",
+
     badge_fullstack: "Full-stack",
-    badge_frontend: "Front-end",
-    
-    // Project titles
-    project1_title: "Système de Gestion Scolaire",
-    project1_desc: "Une application web full-stack pour gérer les étudiants, les classes et les dossiers scolaires. Elle fournit une gestion structurée des données et des fonctionnalités administratives.",
-    project2_title: "Site Web de Menu Restaurant",
-    project2_desc: "Un site web de menu restaurant responsive avec navigation interactive, conçu pour améliorer l'expérience utilisateur et la clarté visuelle.",
-    project3_title: "Système de Gestion d'Utilisateurs",
-    project3_desc: "Un système web pour gérer les comptes utilisateurs, rôles et permissions, développé en utilisant PHP et JavaScript dans un environnement serveur local.",
-    
-    // Contact page
-    contact_title: "Contact",
-    contact_get_in_touch: "Prendre contact",
-    contact_intro_1: "Je suis toujours ouverte à discuter de nouvelles opportunités, projets ou collaborations.",
-    contact_intro_2: "N'hésitez pas à me contacter par l'un des canaux ci-dessous :",
-    contact_email_label: "Email",
-    contact_availability: "Disponibilité",
-    contact_availability_text: "Freelance · Stage · Ouvert aux opportunités",
-    
-    // Buttons
+    badge_frontend:  "Front-end",
+
+    project1_title: "Système de Gestion de Magasin",
+    project1_desc:  "Application web de gestion de magasin avec Django : CRUD complet, calcul automatique des ventes, tableau de bord analytique et module de prévision simple des ventes en Python.",
+    project2_title: "Outil d'Automatisation de Fichiers",
+    project2_desc:  "Outil d'automatisation système en Python pour trier, classer et organiser dynamiquement les documents par catégorie, avec gestion des extensions.",
+    project3_title: "Système de Gestion Scolaire",
+    project3_desc:  "Application web full-stack pour gérer les étudiants, classes et dossiers scolaires avec fonctionnalités admin complètes.",
+    project4_title: "Système de Gestion d'Utilisateurs",
+    project4_desc:  "Système web pour gérer les comptes utilisateurs avec CRUD complet et gestion des rôles, développé avec Symfony et XAMPP.",
+    project5_title: "Système de Gestion des Hôpitaux",
+    project5_desc:  "Système web pour gérer les dossiers patients (CRUD) développé en C, démontrant la programmation système appliquée à un cas réel.",
+    project6_title: "Site Menu Restaurant",
+    project6_desc:  "Site de menu restaurant responsive avec navigation interactive et design visuel épuré, axé sur l'UX et la lisibilité.",
+
     btn_github: "GitHub",
-    btn_video: "Démo Vidéo",
-    btn_live: "Démo Live",
-    
-    // Footer
+    btn_video:  "Démo Vidéo",
+    btn_live:   "Démo Live",
+
+    contact_title:         "Prendre Contact",
+    contact_intro_1:       "Ouverte aux stages, projets freelance et opportunités de collaboration.",
+    contact_intro_2:       "N'hésitez pas à me contacter via les canaux ci-dessous :",
+    contact_get_in_touch:  "Me contacter",
+    contact_email_label:   "Email",
+    contact_phone_label:   "Téléphone",
+    contact_availability:  "Disponibilité",
+    avail_status:          "Recherche un stage d'été (PFA) — 1 à 2 mois",
+    avail_tag_1: "Stage",
+    avail_tag_2: "Freelance",
+    avail_tag_3: "Ouverte aux opportunités",
+    contact_profile_label: "Résumé Profil",
+    contact_school:        "École",
+    contact_stack:         "Stack",
+    contact_response:      "Réponse",
+    contact_response_val:  "Sous 24h",
+    contact_cv_title:      "Télécharger CV",
+    contact_cv_desc:       "Téléchargez mon CV complet en PDF.",
+    contact_cv_btn:        "Télécharger CV (PDF)",
+
     back_to_profile: "← Retour au profil",
-    back_to_home: "← Retour à l'accueil",
+    back_to_home:    "← Retour à l'accueil",
   }
 };
 
-/* 🔹 SET LANGUAGE - FONCTION CORRIGÉE */
+/* ========== LANGUAGE ========== */
 function setLanguage(lang) {
-  if (!translations[lang]) {
-    console.error(`Langue non supportée: ${lang}`);
-    return;
-  }
-  
-  // 1. Changer l'attribut lang de la balise html
+  if (!translations[lang]) return;
   document.documentElement.lang = lang;
-  
-  // 2. Mettre à jour le titre de la page
-  const pageTitle = document.querySelector('title[data-i18n]');
-  if (pageTitle) {
-    const key = pageTitle.getAttribute('data-i18n');
-    if (translations[lang][key]) {
-      pageTitle.textContent = translations[lang][key];
-    }
+
+  // Page title
+  const titleEl = document.querySelector("title[data-i18n]");
+  if (titleEl) {
+    const key = titleEl.getAttribute("data-i18n");
+    if (translations[lang][key]) titleEl.textContent = translations[lang][key];
   }
-  
-  // 3. Mettre à jour TOUS les éléments avec data-i18n
-  const elements = document.querySelectorAll("[data-i18n]");
-  
-  elements.forEach(el => {
-    // Ne pas traiter le titre ici, déjà fait
-    if (el.tagName === 'TITLE') return;
-    
-    const key = el.getAttribute('data-i18n');
-    
-    if (key && translations[lang][key]) {
-      const translation = translations[lang][key];
-      
-      // Vérifier le type d'élément
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        if (el.hasAttribute('placeholder')) {
-          el.setAttribute('placeholder', translation);
-        }
-        if (el.hasAttribute('value') && !el.type === 'submit') {
-          el.setAttribute('value', translation);
-        }
-      } else if (el.tagName === 'IMG') {
-        if (el.hasAttribute('alt')) {
-          el.setAttribute('alt', translation);
-        }
-      } else if (el.tagName === 'A' && el.hasAttribute('href') && el.getAttribute('href').startsWith('mailto:')) {
-        // Ne pas modifier les liens mailto
-      } else {
-        // Pour les autres éléments, mettre à jour le texte
-        el.textContent = translation;
-      }
-    }
-  });
-  
-  // 4. Mettre à jour les boutons de langue actifs
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    if (btn.getAttribute('data-lang') === lang) {
-      btn.classList.add('active');
+
+  // All i18n elements
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    if (el.tagName === "TITLE") return;
+    const key = el.getAttribute("data-i18n");
+    const val = translations[lang][key];
+    if (!val) return;
+    if ((el.tagName === "INPUT" || el.tagName === "TEXTAREA") && el.hasAttribute("placeholder")) {
+      el.setAttribute("placeholder", val);
+    } else if (el.tagName === "IMG" && el.hasAttribute("alt")) {
+      el.setAttribute("alt", val);
     } else {
-      btn.classList.remove('active');
+      el.textContent = val;
     }
   });
-  
-  // 5. Sauvegarder la préférence de langue
+
+  // Active lang btn
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+  });
+
   localStorage.setItem("preferred_lang", lang);
-  
-  console.log(`Langue changée vers: ${lang}`);
 }
 
-/* 🔹 LOAD SAVED LANGUAGE */
 function loadLanguage() {
-  const savedLang = localStorage.getItem("preferred_lang");
-  const browserLang = navigator.language.split('-')[0];
-  
-  let langToUse = "en"; // Par défaut
-  
-  if (savedLang && translations[savedLang]) {
-    langToUse = savedLang;
-  } else if (translations[browserLang]) {
-    langToUse = browserLang;
-  }
-  
-  setLanguage(langToUse);
+  const saved   = localStorage.getItem("preferred_lang");
+  const browser = navigator.language.split("-")[0];
+  setLanguage(saved && translations[saved] ? saved : (translations[browser] ? browser : "en"));
 }
 
-/* 🔹 PROJECTS FILTER & SEARCH */
+/* ========== PROJECT FILTERS ========== */
 function initProjectsFilter() {
-  const projectsGrid = document.getElementById('projectsGrid');
-  const filterButtons = document.querySelectorAll('.segmented__btn[data-filter]');
-  const searchInput = document.getElementById('searchInput');
-  
-  if (!projectsGrid || filterButtons.length === 0) return;
-  
-  const projects = Array.from(projectsGrid.querySelectorAll('.project'));
-  
-  // Fonction pour filtrer les projets
-  function filterProjects() {
-    const activeFilter = document.querySelector('.segmented__btn.is-active')?.dataset.filter || 'all';
-    const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
-    
-    projects.forEach(project => {
-      const categories = project.dataset.category || '';
-      const title = project.dataset.title || '';
-      const textContent = project.textContent.toLowerCase();
-      
-      let categoryMatch = activeFilter === 'all' || categories.includes(activeFilter);
-      let searchMatch = !searchTerm || 
-                       title.toLowerCase().includes(searchTerm) || 
-                       textContent.includes(searchTerm) ||
-                       categories.toLowerCase().includes(searchTerm);
-      
-      if (categoryMatch && searchMatch) {
-        project.style.display = 'block';
-        project.style.opacity = '1';
-        project.style.transform = 'translateY(0)';
+  const grid    = document.getElementById("projectsGrid");
+  const filters = document.querySelectorAll(".segmented__btn[data-filter]");
+  const search  = document.getElementById("searchInput");
+  if (!grid || !filters.length) return;
+
+  const cards = Array.from(grid.querySelectorAll(".project"));
+  cards.forEach(c => { c.style.transition = "opacity .25s, transform .25s"; });
+
+  function applyFilters() {
+    const active = document.querySelector(".segmented__btn.is-active")?.dataset.filter || "all";
+    const term   = search ? search.value.toLowerCase().trim() : "";
+    cards.forEach(card => {
+      const cats  = card.dataset.category || "";
+      const title = (card.dataset.title || "").toLowerCase();
+      const text  = card.textContent.toLowerCase();
+      const catOk = active === "all" || cats.includes(active);
+      const srcOk = !term || title.includes(term) || text.includes(term) || cats.includes(term);
+      if (catOk && srcOk) {
+        card.style.display = "flex";
+        requestAnimationFrame(() => { card.style.opacity = "1"; card.style.transform = "translateY(0)"; });
       } else {
-        project.style.opacity = '0';
-        project.style.transform = 'translateY(10px)';
-        setTimeout(() => {
-          project.style.display = 'none';
-        }, 200);
+        card.style.opacity = "0"; card.style.transform = "translateY(8px)";
+        setTimeout(() => { if (card.style.opacity === "0") card.style.display = "none"; }, 260);
       }
     });
   }
-  
-  // Gestion des clics sur les boutons de filtre
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      // Retirer la classe active de tous les boutons
-      filterButtons.forEach(btn => btn.classList.remove('is-active'));
-      // Ajouter la classe active au bouton cliqué
-      button.classList.add('is-active');
-      // Appliquer le filtre
-      filterProjects();
+
+  filters.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filters.forEach(b => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      applyFilters();
     });
   });
-  
-  // Gestion de la recherche en temps réel
-  if (searchInput) {
-    searchInput.addEventListener('input', filterProjects);
-    // Ajouter un bouton de réinitialisation de recherche
-    searchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        searchInput.value = '';
-        filterProjects();
-      }
-    });
+
+  if (search) {
+    search.addEventListener("input", applyFilters);
+    search.addEventListener("keydown", e => { if (e.key === "Escape") { search.value = ""; applyFilters(); } });
   }
-  
-  // Initialiser avec tous les projets visibles
-  filterProjects();
-  
-  // Ajouter des styles pour l'animation
-  projects.forEach(project => {
-    project.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+  applyFilters();
+}
+
+/* ========== ACTIVE NAV ========== */
+function highlightNav() {
+  const page = window.location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll(".nav__link").forEach(link => {
+    link.classList.toggle("is-active", link.getAttribute("href") === page);
   });
 }
 
-/* 🔹 HIGHLIGHT ACTIVE NAV LINK */
-function highlightActiveNav() {
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  const navLinks = document.querySelectorAll('.nav__link');
-  
-  navLinks.forEach(link => {
-    const linkHref = link.getAttribute('href');
-    if (linkHref === currentPage) {
-      link.classList.add('is-active');
-    } else {
-      link.classList.remove('is-active');
-    }
-  });
-}
-
-/* 🔹 INITIALISATION COMPLÈTE */
-document.addEventListener('DOMContentLoaded', function() {
-  console.log("Initialisation du site...");
-  
-  // Initialiser le thème
+/* ========== INIT ========== */
+document.addEventListener("DOMContentLoaded", () => {
   initTheme();
-  
-  // Initialiser les années du footer
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
-  }
-  
-  // Initialiser la langue
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
   loadLanguage();
-  
-  // Initialiser les filtres de projets
   initProjectsFilter();
-  
-  // Mettre en surbrillance le lien actif
-  highlightActiveNav();
-  
-  // Gestionnaires pour les boutons de langue
-  document.querySelectorAll('.lang-btn').forEach(button => {
-    button.addEventListener('click', function(e) {
-      e.preventDefault();
-      const lang = this.getAttribute('data-lang');
-      if (lang) {
-        setLanguage(lang);
-      }
+  highlightNav();
+
+  document.querySelectorAll(".lang-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const lang = btn.getAttribute("data-lang");
+      if (lang) setLanguage(lang);
     });
   });
-  
-  // Pour compatibilité avec les anciens boutons onclick
-  const oldLangButtons = document.querySelectorAll('button[onclick*="setLanguage("]');
-  oldLangButtons.forEach(btn => {
-    const oldOnClick = btn.getAttribute('onclick');
-    if (oldOnClick) {
-      btn.removeAttribute('onclick');
-      const langMatch = oldOnClick.match(/setLanguage\('(\w+)'\)/);
-      if (langMatch) {
-        btn.classList.add('lang-btn');
-        btn.setAttribute('data-lang', langMatch[1]);
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          setLanguage(langMatch[1]);
-        });
-      }
-    }
-  });
-  
-  console.log("Initialisation terminée");
 });
 
-// Rendre la fonction accessible globalement pour la compatibilité
 window.setLanguage = setLanguage;
